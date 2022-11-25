@@ -3,6 +3,21 @@ import { red,  } from '@mui/material/colors';
 
 
 export const lightTheme = createTheme({
+  typography: {
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+  },
+
   palette: {
     mode: 'light',
     primary: {
@@ -16,6 +31,7 @@ export const lightTheme = createTheme({
     MuiLink: {
       defaultProps: {
         underline: 'none',
+        
       },
     },
     MuiAppBar: {
@@ -35,11 +51,11 @@ export const lightTheme = createTheme({
       styleOverrides: {
         h1: {
           fontSize: 30,
-          fontWeight: 600
+          fontWeight: 700
         },
         h2: {
           fontSize: 20,
-          fontWeight: 400
+          fontWeight: 500
         },
         subtitle1: {
           fontSize: 18,
@@ -57,6 +73,8 @@ export const lightTheme = createTheme({
       },
       styleOverrides: {
         root: {
+          backgroundColor: 'white',
+          color: 'black',
           textTransform: 'none',
           boxShadow: 'none',
           borderRadius: 10,
