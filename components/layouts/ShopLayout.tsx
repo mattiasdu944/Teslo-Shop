@@ -12,7 +12,7 @@ export const ShopLayout = ({ children, title, pageDescription, imageFullUrl}:Pro
     return (
         <>
             <Head>
-                <title>{title}</title>
+                <title>{`Teslo-Shop | ${title}`}</title>
                 <meta name="description" content={pageDescription} />
                 
                 <meta name='og:title' content={ title }/>
