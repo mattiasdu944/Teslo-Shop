@@ -1,5 +1,8 @@
 services:
   teslodb:
+    build: 
+      context: .
+      dockerfile: Dockerfile
     image: mongo:5.0.0
     container_name: teslo-database
     ports:
