@@ -1,17 +1,18 @@
 import { FC, useMemo, useState } from 'react'
-import { IProducts } from '../../interfaces'
+import { IProduct } from '../../interfaces'
 
 import { Box, Card, CardActionArea, CardMedia, Grid, Typography } from '@mui/material'
 import Link from 'next/link'
 
 
 interface Props {
-    product : IProducts
+    product : IProduct
 }
 
 export const CardProduct: FC<Props> = ({ product }) => {
 
-    const [isHovered, setIsHovered] = useState(false)
+    const [isImageLoader, setIsImageLoader] = useState<boolean>(false)
+    const [isHovered, setIsHovered] = useState<boolean>(false)
 
     const productImage = useMemo(() => {
         return isHovered
@@ -35,12 +36,13 @@ export const CardProduct: FC<Props> = ({ product }) => {
                             image={ productImage }
                             alt={ product.title }
                             sx={{ transition:'all .3s ease-in-out ' }}
+                            onLoad={ () => setIsImageLoader(true) }
 
                         />
                     </CardActionArea>
             </Card>
                 </Link>
-            <Box sx={{ mt:1 }} className='fadeIn'>
+            <Box sx={{ mt:1, display: isImageLoader ? 'block' : 'none' }} className='fadeIn'>
                 <Typography fontWeight={700}>{ product.title }</Typography>
                 <Typography fontWeight={600}>Price: ${ product.price }</Typography>
             </Box>
