@@ -1,10 +1,10 @@
 import { Grid, Card, CardActionArea, CardMedia } from '@mui/material';
 import { FC } from "react"
-import { IProducts } from "../../interfaces"
+import { IProduct } from "../../interfaces"
 import { CardProduct } from './CardProduct';
 
 interface Props{
-    products: IProducts[]
+    products: IProduct[]
 }
 
 export const ProductList: FC <Props> = ({ products }) => {
