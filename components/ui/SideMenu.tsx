@@ -1,14 +1,23 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useRouter } from 'next/router';
 import { UiContext } from '../../context/ui/UiContext';
 
-import { Box, Divider, Drawer, IconButton, Input, InputAdornment, List, ListItem, ListItemIcon, ListItemText, ListSubheader } from "@mui/material"
+import { Box, Divider, Drawer, IconButton, Input, InputAdornment, List, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from "@mui/material"
 import { AccountCircleOutlined, AdminPanelSettings, CategoryOutlined, ConfirmationNumberOutlined, EscalatorWarningOutlined, FemaleOutlined, LoginOutlined, MaleOutlined, SearchOutlined, VpnKeyOutlined } from "@mui/icons-material"
 
 
 export const SideMenu = () => {
     const router = useRouter();
     const { isMenuOpen, toggleSideMenu } = useContext( UiContext );
+
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const onSearchTerm = () => {
+        if( searchTerm.trim().length === 0 ) return;
+
+        navigateTo(`/search/${ searchTerm }`);
+    } 
+
 
     const navigateTo = ( url : string ) => {
         router.push( url );
@@ -31,10 +40,13 @@ export const SideMenu = () => {
                         <Input
                             type='text'
                             placeholder="Buscar..."
+                            value={ searchTerm }
+                            onChange={ e => setSearchTerm( e.target.value ) }
+                            onKeyPress={ e => e.key === 'Enter' ? onSearchTerm() : null }
                             endAdornment={
                                 <InputAdornment position="end">
                                     <IconButton
-                                        aria-label="toggle password visibility"
+                                        onClick={ onSearchTerm }
                                     >
                                         <SearchOutlined />
                                     </IconButton>
@@ -43,23 +55,22 @@ export const SideMenu = () => {
                         />
                     </ListItem>
 
-                    <ListItem button>
+                    <ListItemButton>
                         <ListItemIcon>
                             <AccountCircleOutlined />
                         </ListItemIcon>
                         <ListItemText primary={'Perfil'} />
-                    </ListItem>
+                    </ListItemButton>
 
-                    <ListItem button>
+                    <ListItemButton>
                         <ListItemIcon>
                             <ConfirmationNumberOutlined />
                         </ListItemIcon>
                         <ListItemText primary={'Mis Ordenes'} />
-                    </ListItem>
+                    </ListItemButton>
 
 
-                    <ListItem 
-                        button 
+                    <ListItemButton 
                         sx={{ display: { xs: '', sm: 'none' } }} 
                         onClick={ () => navigateTo('/category/men') }
                     >
@@ -67,10 +78,9 @@ export const SideMenu = () => {
                             <MaleOutlined />
                         </ListItemIcon>
                         <ListItemText primary={'Hombres'} />
-                    </ListItem>
+                    </ListItemButton>
 
-                    <ListItem 
-                        button 
+                    <ListItemButton
                         sx={{ display: { xs: '', sm: 'none' } }} 
                         onClick={ () => navigateTo('/category/women') }
                     >
@@ -78,10 +88,9 @@ export const SideMenu = () => {
                             <FemaleOutlined />
                         </ListItemIcon>
                         <ListItemText primary={'Mujeres'} />
-                    </ListItem>
+                    </ListItemButton>
 
-                    <ListItem 
-                        button 
+                    <ListItemButton
                         sx={{ display: { xs: '', sm: 'none' } }} 
                         onClick={ () => navigateTo('/category/kid') }
                     >
@@ -89,47 +98,47 @@ export const SideMenu = () => {
                             <EscalatorWarningOutlined />
                         </ListItemIcon>
                         <ListItemText primary={'Niños'} />
-                    </ListItem>
+                    </ListItemButton>
 
 
-                    <ListItem button>
+                    <ListItemButton>
                         <ListItemIcon>
                             <VpnKeyOutlined />
                         </ListItemIcon>
                         <ListItemText primary={'Ingresar'} />
-                    </ListItem>
+                    </ListItemButton>
 
-                    <ListItem button>
+                    <ListItemButton>
                         <ListItemIcon>
                             <LoginOutlined />
                         </ListItemIcon>
                         <ListItemText primary={'Salir'} />
-                    </ListItem>
+                    </ListItemButton>
 
 
                     {/* Admin */}
                     <Divider />
                     <ListSubheader>Admin Panel</ListSubheader>
 
-                    <ListItem button>
+                    <ListItemButton>
                         <ListItemIcon>
                             <CategoryOutlined />
                         </ListItemIcon>
                         <ListItemText primary={'Productos'} />
-                    </ListItem>
-                    <ListItem button>
+                    </ListItemButton>
+                    <ListItemButton>
                         <ListItemIcon>
                             <ConfirmationNumberOutlined />
                         </ListItemIcon>
                         <ListItemText primary={'Ordenes'} />
-                    </ListItem>
+                    </ListItemButton>
 
-                    <ListItem button>
+                    <ListItemButton>
                         <ListItemIcon>
                             <AdminPanelSettings />
                         </ListItemIcon>
                         <ListItemText primary={'Usuarios'} />
-                    </ListItem>
+                    </ListItemButton>
                 </List>
             </Box>
         </Drawer>
